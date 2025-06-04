@@ -2,6 +2,7 @@ package org.fran.api.configs;
 
 import io.javalin.Javalin;
 import io.javalin.plugin.bundled.RouteOverviewPlugin;
+import org.fran.api.controllers.HealthController;
 import org.fran.dataAccess.InMemoryStorage;
 import org.fran.exeptions.*;
 import org.fran.services.BinLookupService;
@@ -23,6 +24,7 @@ public class JavalinConfig {
         // Create controller instance
         BinLookupController binLookupController = new BinLookupController(binLookupService);
         CostMatrixController costMatrixController = new CostMatrixController(costMatrixService);
+        HealthController healthController = new HealthController();
 
         // Configure Javalin
             return Javalin.create(config -> {
@@ -30,6 +32,9 @@ public class JavalinConfig {
             config.plugins.enableDevLogging();
         }).routes(() -> {
             // Route definitions
+            path("/health", () ->{
+                get(healthController.healthCheck);
+            });
             path("/api/clearingcost", () -> {
                 get("/{cardNumber}", binLookupController.lookup);
             });

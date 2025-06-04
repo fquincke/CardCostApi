@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  cost-service:
+    build: src/main
+    image: fran/cost-matrix-service:1.0.0
+    container_name: cost-matrix-service
+    ports:
+      - "7070:7070"
+    environment:
+      - JAVA_OPTS=-Xmx512m -Dspring.profiles.active=prod
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:7070/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
