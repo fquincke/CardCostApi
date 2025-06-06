@@ -1,23 +1,18 @@
 package org.fran.dataAccess;
 
+import org.fran.dataAccess.interfaces.IStorage;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public final class InMemoryStorage {
-    private static InMemoryStorage instance;
+public class InMemoryStorage implements IStorage {
     private Map<String, Integer> clearingCostMatrix;
 
-     private InMemoryStorage(){
+    public InMemoryStorage(){
         clearingCostMatrix = new HashMap<>();
 
         clearingCostMatrix.put("US", 5);
         clearingCostMatrix.put("GR", 10);
-    }
-    public static InMemoryStorage getInstance(){
-         if(instance == null){
-             instance = new InMemoryStorage();
-         }
-         return instance;
     }
 
     public void addOrUpdateCountrytoMatrix(String country, int cost){
