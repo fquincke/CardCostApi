@@ -1,6 +1,6 @@
 package org.fran.services;
 
-import org.fran.dataAccess.InMemoryStorage;
+import org.fran.dataAccess.interfaces.IStorage;
 import org.fran.dtos.CountryCostItemDto;
 import org.fran.exeptions.CountryAlreadyExistsException;
 import org.fran.exeptions.InvalidCountryException;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class CostMatrixService {
-    private final InMemoryStorage storage;
+    private final IStorage storage;
 
-    public CostMatrixService(InMemoryStorage storage) {
+    public CostMatrixService(IStorage storage) {
         this.storage = storage;
     }
 
